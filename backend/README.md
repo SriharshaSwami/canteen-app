@@ -1,0 +1,1 @@
+middlewares are just some js functions, so we need to implicitly handle errors using try catch unlike APIs routes that are servers

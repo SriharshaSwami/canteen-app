@@ -1,0 +1,152 @@
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test1@gmail.com",
+  "password": "123456"
+}
+
+### User Registration (SignUp)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "test1",
+    "email": "test1@gmail.com",
+    "password": "test1pass"
+}
+
+### Admin Registration (for testing)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "admin1",
+    "email": "admin@gmail.com",
+    "password": "adminpass"
+}
+
+### User authentication (Login)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test1@gmail.com",
+  "password": "test1pass"
+}
+
+### Admin Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "adminpass"
+}
+
+### Get User Profile
+GET http://localhost:5000/api/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTE3NmM0ZTY5YTliZWIyNmMzNzVlOSIsImlhdCI6MTc3MjYzMzU0MSwiZXhwIjoxNzc1MjI1NTQxfQ.y1mj0pbe44yxLMfT-nc7LKO54yOCP8mpnehhM6yQOqY
+
+# =====================
+# CREDIT SYSTEM APIs
+# =====================
+
+### Get Credit Balance (Protected)
+GET http://localhost:5000/api/credits/balance
+Authorization: Bearer <YOUR_TOKEN>
+
+### Get User Transactions with Pagination (Protected)
+GET http://localhost:5000/api/credits/transactions?page=1&limit=10
+Authorization: Bearer <YOUR_TOKEN>
+
+### Get User Transactions filtered by type (Protected)
+GET http://localhost:5000/api/credits/transactions?type=meal_purchase&page=1&limit=5
+Authorization: Bearer <YOUR_TOKEN>
+
+### Add Credits to User (Admin Only)
+POST http://localhost:5000/api/credits/add
+Content-Type: application/json
+Authorization: Bearer <ADMIN_TOKEN>
+
+{
+  "userId": "<USER_ID>",
+  "amount": 500,
+  "description": "Monthly credits allocation"
+}
+
+### Get All Transactions with Pagination (Admin Only)
+GET http://localhost:5000/api/credits/all-transactions?page=1&limit=10
+Authorization: Bearer <ADMIN_TOKEN>
+
+### Get All Transactions filtered by userId (Admin Only)
+GET http://localhost:5000/api/credits/all-transactions?userId=<USER_ID>&page=1&limit=10
+Authorization: Bearer <ADMIN_TOKEN>
+
+# =====================
+# MENU SYSTEM APIs
+# =====================
+
+### Get All Menu Items with Pagination (Public)
+GET http://localhost:5000/api/menu?page=1&limit=10
+
+### Get Breakfast Menu with Pagination (Public)
+GET http://localhost:5000/api/menu?category=breakfast&page=1&limit=10
+
+### Get Available Menu Items sorted by price (Public)
+GET http://localhost:5000/api/menu?available=true&sort=-price&page=1&limit=10
+
+### Get Single Menu Item (Public)
+GET http://localhost:5000/api/menu/<MEAL_ID>
+
+### Create Menu Item (Admin Only)
+POST http://localhost:5000/api/menu
+Content-Type: application/json
+Authorization: Bearer <ADMIN_TOKEN>
+
+{
+  "mealName": "Idli Sambar",
+  "price": 30,
+  "category": "breakfast",
+  "description": "2 Idlis with sambar and chutney",
+  "available": true
+}
+
+### Create Another Menu Item (Admin Only)
+POST http://localhost:5000/api/menu
+Content-Type: application/json
+Authorization: Bearer <ADMIN_TOKEN>
+
+{
+  "mealName": "Veg Thali",
+  "price": 60,
+  "category": "lunch",
+  "description": "Rice, dal, sabzi, roti, salad",
+  "available": true
+}
+
+### Update Menu Item (Admin Only)
+PUT http://localhost:5000/api/menu/<MEAL_ID>
+Content-Type: application/json
+Authorization: Bearer <ADMIN_TOKEN>
+
+{
+  "price": 35,
+  "description": "3 Idlis with sambar and chutney"
+}
+
+### Toggle Meal Availability (Admin Only)
+PATCH http://localhost:5000/api/menu/<MEAL_ID>/availability
+Authorization: Bearer <ADMIN_TOKEN>
+
+### Delete Menu Item (Admin Only)
+DELETE http://localhost:5000/api/menu/<MEAL_ID>
+Authorization: Bearer <ADMIN_TOKEN>
+
+# =====================
+# MEAL PURCHASE APIs
+# =====================
+
+### Purchase Meal (Protected)
+POST http://localhost:5000/api/menu/<MEAL_ID>/purchase
+Authorization: Bearer <YOUR_TOKEN>
