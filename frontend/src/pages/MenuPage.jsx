@@ -41,10 +41,10 @@ const MenuPage = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 transition-colors duration-200">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Menu</h1>
-        <p className="text-gray-600 mt-1">Browse and purchase meals</p>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Menu</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Browse and purchase meals</p>
       </div>
 
       {/* Filter Buttons */}
@@ -53,10 +53,10 @@ const MenuPage = () => {
           <button
             key={btn.value}
             onClick={() => setFilter(btn.value)}
-            className={`px-4 py-2 rounded-full font-medium transition ${
+            className={`px-4 py-2 rounded-full font-medium transition-colors duration-200 ${
               filter === btn.value
                 ? 'bg-indigo-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
+                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
             {btn.label}
@@ -77,7 +77,7 @@ const MenuPage = () => {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No menu items found</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">No menu items found</p>
         </div>
       )}
     </div>

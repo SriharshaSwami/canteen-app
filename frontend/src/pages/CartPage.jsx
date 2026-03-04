@@ -57,27 +57,27 @@ const CartPage = () => {
   const canAfford = balance >= totalAmount;
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Shopping Cart</h1>
+    <div className="max-w-4xl mx-auto transition-colors duration-200">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Shopping Cart</h1>
 
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-lg">
           {error}
         </div>
       )}
 
       {checkoutError && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 rounded-lg">
           {checkoutError}
         </div>
       )}
 
       {items.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-8 text-center">
-          <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center transition-colors duration-200">
+          <svg className="mx-auto h-16 w-16 text-gray-400 dark:text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
-          <p className="text-gray-500 text-lg mb-4">Your cart is empty</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg mb-4">Your cart is empty</p>
           <button
             onClick={() => navigate('/menu')}
             className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -90,10 +90,10 @@ const CartPage = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {items.map((item) => (
-              <div key={item.menuItemId._id} className="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+              <div key={item.menuItemId._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center gap-4 transition-colors duration-200">
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">{item.menuItemId.mealName}</h3>
-                  <p className="text-sm text-gray-500 capitalize">{item.menuItemId.category}</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{item.menuItemId.mealName}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{item.menuItemId.category}</p>
                   <p className="text-blue-600 font-medium">Rs {item.price.toFixed(2)} each</p>
                 </div>
 
@@ -102,15 +102,15 @@ const CartPage = () => {
                   <button
                     onClick={() => handleQuantityChange(item.menuItemId._id, item.quantity - 1)}
                     disabled={item.quantity <= 1}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     -
                   </button>
-                  <span className="w-8 text-center font-medium">{item.quantity}</span>
+                  <span className="w-8 text-center font-medium dark:text-white">{item.quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(item.menuItemId._id, item.quantity + 1)}
                     disabled={item.quantity >= 10}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     +
                   </button>
@@ -118,7 +118,7 @@ const CartPage = () => {
 
                 {/* Subtotal */}
                 <div className="w-24 text-right">
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-gray-900 dark:text-white">
                     Rs {(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
@@ -146,23 +146,23 @@ const CartPage = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-4 transition-colors duration-200">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Order Summary</h2>
 
               <div className="space-y-2 mb-4">
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-gray-600 dark:text-gray-400">
                   <span>Items ({items.length})</span>
                   <span>Rs {totalAmount.toFixed(2)}</span>
                 </div>
-                <div className="border-t pt-2 flex justify-between font-semibold text-gray-900">
+                <div className="border-t dark:border-gray-700 pt-2 flex justify-between font-semibold text-gray-900 dark:text-white">
                   <span>Total</span>
                   <span>Rs {totalAmount.toFixed(2)}</span>
                 </div>
               </div>
 
-              <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+              <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Your Balance</span>
+                  <span className="text-gray-600 dark:text-gray-400">Your Balance</span>
                   <span className={`font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
                     Rs {balance.toFixed(2)}
                   </span>
@@ -175,13 +175,13 @@ const CartPage = () => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Order Notes (Optional)
                 </label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                   rows={2}
                   placeholder="Any special instructions..."
                   maxLength={500}

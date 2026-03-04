@@ -26,42 +26,42 @@ const MenuCard = ({ item, showAdminControls = false, onEdit, onDelete, onToggle 
   const getMealTypeColor = (type) => {
     switch (type?.toLowerCase()) {
       case 'breakfast':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400';
       case 'lunch':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400';
       case 'dinner':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-200">
       <div className="p-5">
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-lg font-semibold text-gray-800">{item.mealName}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{item.mealName}</h3>
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getMealTypeColor(item.category)}`}>
             {item.category}
           </span>
         </div>
         
-        <p className="text-gray-600 text-sm mb-4">{item.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{item.description}</p>
         
         <div className="flex justify-between items-center">
-          <span className="text-2xl font-bold text-indigo-600">Rs {item.price}</span>
+          <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Rs {item.price}</span>
           <div className="flex items-center space-x-2">
             {item.stock !== undefined && (
               <span className={`px-2 py-1 rounded text-xs ${
-                item.stock > 10 ? 'bg-blue-100 text-blue-800' : 
-                item.stock > 0 ? 'bg-orange-100 text-orange-800' : 
-                'bg-red-100 text-red-800'
+                item.stock > 10 ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400' : 
+                item.stock > 0 ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-400' : 
+                'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
               }`}>
                 {item.stock > 0 ? `${item.stock} left` : 'Out of Stock'}
               </span>
             )}
             <span className={`px-2 py-1 rounded text-xs ${
-              item.available && item.stock > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              item.available && item.stock > 0 ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
             }`}>
               {item.available && item.stock > 0 ? 'Available' : 'Unavailable'}
             </span>
@@ -85,7 +85,7 @@ const MenuCard = ({ item, showAdminControls = false, onEdit, onDelete, onToggle 
         {!showAdminControls && (!item.available || item.stock === 0) && (
           <button
             disabled
-            className="mt-4 w-full py-2 px-4 rounded-md bg-gray-300 text-gray-500 cursor-not-allowed"
+            className="mt-4 w-full py-2 px-4 rounded-md bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
           >
             Out of Stock
           </button>
@@ -97,21 +97,21 @@ const MenuCard = ({ item, showAdminControls = false, onEdit, onDelete, onToggle 
               onClick={() => onToggle(item._id, !item.available)}
               className={`flex-1 py-2 px-3 rounded-md transition text-sm ${
                 item.available
-                  ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                  : 'bg-green-100 text-green-700 hover:bg-green-200'
+                  ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
+                  : 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50'
               }`}
             >
               {item.available ? 'Disable' : 'Enable'}
             </button>
             <button
               onClick={() => onEdit(item)}
-              className="flex-1 bg-blue-100 text-blue-700 py-2 px-3 rounded-md hover:bg-blue-200 transition text-sm"
+              className="flex-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 py-2 px-3 rounded-md hover:bg-blue-200 dark:hover:bg-blue-900/50 transition text-sm"
             >
               Edit
             </button>
             <button
               onClick={() => onDelete(item._id)}
-              className="flex-1 bg-red-100 text-red-700 py-2 px-3 rounded-md hover:bg-red-200 transition text-sm"
+              className="flex-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 py-2 px-3 rounded-md hover:bg-red-200 dark:hover:bg-red-900/50 transition text-sm"
             >
               Delete
             </button>

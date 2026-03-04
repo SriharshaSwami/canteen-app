@@ -4,12 +4,12 @@ import { ordersAPI } from '../api/apiClient';
 import { useAuth } from '../context/AuthContext';
 
 const statusColors = {
-  pending: 'bg-yellow-100 text-yellow-800',
-  accepted: 'bg-blue-100 text-blue-800',
-  preparing: 'bg-purple-100 text-purple-800',
-  ready: 'bg-green-100 text-green-800',
-  completed: 'bg-gray-100 text-gray-800',
-  cancelled: 'bg-red-100 text-red-800',
+  pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+  accepted: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+  preparing: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+  ready: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+  completed: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white',
+  cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
 };
 
 const statusIcons = {
@@ -94,18 +94,18 @@ const OrdersPage = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">My Orders</h1>
+    <div className="max-w-4xl mx-auto transition-colors duration-200">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">My Orders</h1>
 
       {/* Success message for new order */}
       {newOrderId && (
-        <div className="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
+        <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg">
           Order placed successfully! You can track its status below.
         </div>
       )}
 
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg">
           {error}
         </div>
       )}
@@ -115,7 +115,7 @@ const OrdersPage = () => {
         <button
           onClick={() => { setFilter(''); setPage(1); }}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-            filter === '' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            filter === '' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
           All
@@ -125,7 +125,7 @@ const OrdersPage = () => {
             key={status}
             onClick={() => { setFilter(status); setPage(1); }}
             className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${
-              filter === status ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              filter === status ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}
           >
             {statusIcons[status]} {status}
@@ -134,29 +134,29 @@ const OrdersPage = () => {
       </div>
 
       {orders.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-8 text-center">
-          <p className="text-gray-500 text-lg">No orders found</p>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center transition-colors duration-200">
+          <p className="text-gray-500 dark:text-gray-400 text-lg">No orders found</p>
         </div>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
             <div
               key={order._id}
-              className={`bg-white rounded-lg shadow-md overflow-hidden ${
+              className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-200 ${
                 order._id === newOrderId ? 'ring-2 ring-green-500' : ''
               }`}
             >
               {/* Order Header */}
               <button
                 onClick={() => setExpandedOrder(expandedOrder === order._id ? null : order._id)}
-                className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="w-full p-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <div className="text-left">
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-gray-900 dark:text-white">
                       Order #{order._id.slice(-8).toUpperCase()}
                     </p>
-                    <p className="text-sm text-gray-500">{formatDate(order.createdAt)}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{formatDate(order.createdAt)}</p>
                   </div>
                 </div>
 
@@ -164,7 +164,7 @@ const OrdersPage = () => {
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[order.status]}`}>
                     {statusIcons[order.status]} {order.status}
                   </span>
-                  <p className="font-semibold text-gray-900">Rs {order.totalAmount.toFixed(2)}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">Rs {order.totalAmount.toFixed(2)}</p>
                   <svg
                     className={`w-5 h-5 text-gray-400 transition-transform ${
                       expandedOrder === order._id ? 'rotate-180' : ''
@@ -180,17 +180,17 @@ const OrdersPage = () => {
 
               {/* Order Details (Expanded) */}
               {expandedOrder === order._id && (
-                <div className="border-t px-4 py-4">
+                <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-4">
                   {/* Items */}
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-700 mb-2">Items</h4>
+                    <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Items</h4>
                     <div className="space-y-2">
                       {order.items.map((item, index) => (
                         <div key={index} className="flex justify-between text-sm">
-                          <span className="text-gray-600">
+                          <span className="text-gray-600 dark:text-gray-400">
                             {item.quantity}x {item.mealName}
                           </span>
-                          <span className="text-gray-900">Rs {item.subtotal.toFixed(2)}</span>
+                          <span className="text-gray-900 dark:text-white">Rs {item.subtotal.toFixed(2)}</span>
                         </div>
                       ))}
                     </div>
@@ -199,21 +199,21 @@ const OrdersPage = () => {
                   {/* Notes */}
                   {order.notes && (
                     <div className="mb-4">
-                      <h4 className="font-medium text-gray-700 mb-1">Notes</h4>
-                      <p className="text-sm text-gray-600">{order.notes}</p>
+                      <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-1">Notes</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{order.notes}</p>
                     </div>
                   )}
 
                   {/* Status History */}
                   {order.statusHistory && order.statusHistory.length > 0 && (
                     <div className="mb-4">
-                      <h4 className="font-medium text-gray-700 mb-2">Status History</h4>
+                      <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Status History</h4>
                       <div className="space-y-1">
                         {order.statusHistory.map((history, index) => (
                           <div key={index} className="flex items-center gap-2 text-sm">
                             <span className={`w-2 h-2 rounded-full ${statusColors[history.status].replace('text-', 'bg-').replace('-800', '-500')}`}></span>
-                            <span className="text-gray-600 capitalize">{history.status}</span>
-                            <span className="text-gray-400">{formatDate(history.changedAt)}</span>
+                            <span className="text-gray-600 dark:text-gray-400 capitalize">{history.status}</span>
+                            <span className="text-gray-400 dark:text-gray-500">{formatDate(history.changedAt)}</span>
                           </div>
                         ))}
                       </div>
@@ -224,7 +224,7 @@ const OrdersPage = () => {
                   {order.status === 'pending' && (
                     <button
                       onClick={() => handleCancelOrder(order._id)}
-                      className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm font-medium"
+                      className="px-4 py-2 bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900 transition-colors text-sm font-medium"
                     >
                       Cancel Order
                     </button>
@@ -240,17 +240,17 @@ const OrdersPage = () => {
               <button
                 onClick={() => setPage(page - 1)}
                 disabled={page === 1}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Previous
               </button>
-              <span className="px-4 py-2 text-gray-600">
+              <span className="px-4 py-2 text-gray-600 dark:text-gray-400">
                 Page {pagination.page} of {pagination.pages}
               </span>
               <button
                 onClick={() => setPage(page + 1)}
                 disabled={page === pagination.pages}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Next
               </button>

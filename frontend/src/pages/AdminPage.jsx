@@ -186,14 +186,14 @@ const AdminPage = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 transition-colors duration-200">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Admin Panel</h1>
-        <p className="text-gray-600 mt-1">Manage menu, credits, and view transactions</p>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Admin Panel</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Manage menu, credits, and view transactions</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-6">
+      <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -201,7 +201,7 @@ const AdminPage = () => {
             className={`px-6 py-3 font-medium transition ${
               activeTab === tab.id
                 ? 'text-indigo-600 border-b-2 border-indigo-600'
-                : 'text-gray-500 hover:text-gray-700'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
             }`}
           >
             {tab.label}
@@ -218,7 +218,7 @@ const AdminPage = () => {
       {activeTab === 'menu' && (
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">Menu Items</h2>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">Menu Items</h2>
             <button
               onClick={() => {
                 setEditingMenu(null);
@@ -255,18 +255,18 @@ const AdminPage = () => {
       {/* Add Credits Tab */}
       {activeTab === 'users' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Add Credits to User</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-200">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Add Credits to User</h2>
             <form onSubmit={handleAddCredits} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Select User
                 </label>
                 <select
                   value={creditForm.userId}
                   onChange={(e) => setCreditForm({ ...creditForm, userId: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">Choose a user...</option>
                   {users.map((user) => (
@@ -277,7 +277,7 @@ const AdminPage = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Amount (₹)
                 </label>
                 <input
@@ -286,19 +286,19 @@ const AdminPage = () => {
                   value={creditForm.amount}
                   onChange={(e) => setCreditForm({ ...creditForm, amount: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                   placeholder="Enter amount"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Description (Optional)
                 </label>
                 <input
                   type="text"
                   value={creditForm.description}
                   onChange={(e) => setCreditForm({ ...creditForm, description: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                   placeholder="e.g., Monthly allowance"
                 />
               </div>
@@ -311,8 +311,8 @@ const AdminPage = () => {
             </form>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Users List</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-200">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Users List</h2>
             {loading ? (
               <div className="flex justify-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
@@ -320,14 +320,14 @@ const AdminPage = () => {
             ) : (
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {users.map((user) => (
-                  <div key={user._id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <div key={user._id} className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">{user.name}</p>
-                      <p className="text-sm text-gray-500">{user.email}</p>
+                      <p className="font-medium text-gray-800 dark:text-white">{user.name}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-indigo-600">₹{user.creditBalance || 0}</p>
-                      <p className="text-xs text-gray-500">{user.role}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{user.role}</p>
                     </div>
                   </div>
                 ))}
@@ -344,8 +344,8 @@ const AdminPage = () => {
 
       {/* Transactions Tab */}
       {activeTab === 'transactions' && (
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">All Transactions</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-200">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">All Transactions</h2>
           <TransactionTable transactions={transactions} loading={loading} />
         </div>
       )}
@@ -353,34 +353,34 @@ const AdminPage = () => {
       {/* Menu Modal */}
       {menuModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md mx-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4 transition-colors duration-200">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
               {editingMenu ? 'Edit Menu Item' : 'Add Menu Item'}
             </h2>
             <form onSubmit={handleMenuSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                 <input
                   type="text"
                   value={menuForm.mealName}
                   onChange={(e) => setMenuForm({ ...menuForm, mealName: e.target.value })}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
                 <textarea
                   value={menuForm.description}
                   onChange={(e) => setMenuForm({ ...menuForm, description: e.target.value })}
                   required
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Price (₹)</label>
                   <input
                     type="number"
                     min="0"
@@ -388,15 +388,15 @@ const AdminPage = () => {
                     value={menuForm.price}
                     onChange={(e) => setMenuForm({ ...menuForm, price: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
                   <select
                     value={menuForm.category}
                     onChange={(e) => setMenuForm({ ...menuForm, category: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                   >
                     <option value="breakfast">Breakfast</option>
                     <option value="lunch">Lunch</option>
@@ -407,25 +407,25 @@ const AdminPage = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stock</label>
                   <input
                     type="number"
                     min="0"
                     value={menuForm.stock}
                     onChange={(e) => setMenuForm({ ...menuForm, stock: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Daily Limit</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Daily Limit</label>
                   <input
                     type="number"
                     min="0"
                     value={menuForm.dailyLimit}
                     onChange={(e) => setMenuForm({ ...menuForm, dailyLimit: e.target.value })}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
                   />
                 </div>
               </div>
@@ -435,9 +435,9 @@ const AdminPage = () => {
                   id="available"
                   checked={menuForm.available}
                   onChange={(e) => setMenuForm({ ...menuForm, available: e.target.checked })}
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 dark:border-gray-600 rounded"
                 />
-                <label htmlFor="available" className="ml-2 block text-sm text-gray-700">
+                <label htmlFor="available" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   Available for purchase
                 </label>
               </div>
@@ -445,7 +445,7 @@ const AdminPage = () => {
                 <button
                   type="button"
                   onClick={() => setMenuModalOpen(false)}
-                  className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition"
+                  className="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition"
                 >
                   Cancel
                 </button>

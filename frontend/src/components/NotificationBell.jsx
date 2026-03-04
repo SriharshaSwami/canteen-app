@@ -79,7 +79,7 @@ const NotificationBell = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 hover:bg-indigo-500 rounded-md transition"
+        className="relative p-2 hover:bg-indigo-500 dark:hover:bg-gray-700 rounded-md transition"
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -92,14 +92,14 @@ const NotificationBell = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl z-50 overflow-hidden">
-          <div className="px-4 py-3 bg-gray-50 border-b flex justify-between items-center">
-            <h3 className="font-semibold text-gray-800">Notifications</h3>
+        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 overflow-hidden">
+          <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700 border-b dark:border-gray-600 flex justify-between items-center">
+            <h3 className="font-semibold text-gray-800 dark:text-white">Notifications</h3>
             {unreadCount > 0 && (
               <button
                 onClick={handleMarkAllAsRead}
                 disabled={loading}
-                className="text-xs text-indigo-600 hover:text-indigo-800"
+                className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
               >
                 Mark all as read
               </button>
@@ -108,7 +108,7 @@ const NotificationBell = () => {
 
           <div className="max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
-              <div className="p-4 text-center text-gray-500">
+              <div className="p-4 text-center text-gray-500 dark:text-gray-400">
                 No notifications yet
               </div>
             ) : (
@@ -116,19 +116,19 @@ const NotificationBell = () => {
                 <div
                   key={notification._id}
                   onClick={() => !notification.read && handleMarkAsRead(notification._id)}
-                  className={`px-4 py-3 border-b hover:bg-gray-50 cursor-pointer ${
-                    !notification.read ? 'bg-indigo-50' : ''
+                  className={`px-4 py-3 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
+                    !notification.read ? 'bg-indigo-50 dark:bg-indigo-900/30' : ''
                   }`}
                 >
                   <div className="flex justify-between items-start">
-                    <p className={`text-sm ${!notification.read ? 'font-medium text-gray-900' : 'text-gray-600'}`}>
+                    <p className={`text-sm ${!notification.read ? 'font-medium text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                       {notification.message}
                     </p>
                     {!notification.read && (
-                      <span className="w-2 h-2 bg-indigo-600 rounded-full flex-shrink-0 mt-2 ml-2"></span>
+                      <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full flex-shrink-0 mt-2 ml-2"></span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                     {formatTime(notification.createdAt)}
                   </p>
                 </div>
