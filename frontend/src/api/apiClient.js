@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://your-render-url.onrender.com/api';
+const API_BASE_URL = 'https://canteen-app-c932.onrender.com/api';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
