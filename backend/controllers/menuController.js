@@ -129,14 +129,16 @@ export const getMenuItem = async (req, res, next) => {
  */
 export const createMenuItem = async (req, res, next) => {
   try {
-    const { mealName, price, category, description, available } = req.body;
+    const { mealName, price, category, description, available, stock, dailyLimit } = req.body;
 
     const menuItem = await Menu.create({
       mealName,
       price,
       category,
       description,
-      available
+      available,
+      stock,
+      dailyLimit
     });
 
     sendCreated(res, menuItem, "Menu item created successfully");
@@ -184,7 +186,7 @@ export const createMenuItem = async (req, res, next) => {
  */
 export const updateMenuItem = async (req, res, next) => {
   try {
-    const { mealName, price, category, description, available } = req.body;
+    const { mealName, price, category, description, available, stock, dailyLimit } = req.body;
 
     const menuItem = await Menu.findById(req.params.id);
     if (!menuItem) {
@@ -196,6 +198,8 @@ export const updateMenuItem = async (req, res, next) => {
     menuItem.category = category || menuItem.category;
     menuItem.description = description !== undefined ? description : menuItem.description;
     menuItem.available = available !== undefined ? available : menuItem.available;
+    menuItem.stock = stock !== undefined ? stock : menuItem.stock;
+    menuItem.dailyLimit = dailyLimit !== undefined ? dailyLimit : menuItem.dailyLimit;
 
     const updatedMenuItem = await menuItem.save();
     sendSuccess(res, updatedMenuItem, "Menu item updated successfully");
