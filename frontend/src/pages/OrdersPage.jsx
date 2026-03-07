@@ -149,9 +149,9 @@ const OrdersPage = () => {
               {/* Order Header */}
               <button
                 onClick={() => setExpandedOrder(expandedOrder === order._id ? null : order._id)}
-                className="w-full p-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="w-full p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 w-full sm:w-auto">
                   <div className="text-left">
                     <p className="font-medium text-gray-900 dark:text-white">
                       Order #{order._id.slice(-8).toUpperCase()}
@@ -160,7 +160,7 @@ const OrdersPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between w-full sm:w-auto gap-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[order.status]}`}>
                     {statusIcons[order.status]} {order.status}
                   </span>

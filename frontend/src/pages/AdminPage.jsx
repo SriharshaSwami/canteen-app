@@ -193,7 +193,7 @@ const AdminPage = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+      <div className="flex flex-wrap border-b border-gray-200 dark:border-gray-700 mb-6">
         {tabs.map((tab) => (
           <button
             key={tab.id}

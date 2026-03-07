@@ -90,8 +90,8 @@ const CartPage = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {items.map((item) => (
-              <div key={item.menuItemId._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center gap-4 transition-colors duration-200">
-                <div className="flex-1">
+              <div key={item.menuItemId._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-start gap-4 transition-colors duration-200">
+                <div className="flex-1 w-full sm:w-auto min-w-[150px]">
                   <h3 className="font-semibold text-gray-900 dark:text-white">{item.menuItemId.mealName}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{item.menuItemId.category}</p>
                   <p className="text-blue-600 font-medium">Rs {item.price.toFixed(2)} each</p>
